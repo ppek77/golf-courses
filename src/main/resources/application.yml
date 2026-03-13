@@ -9,8 +9,13 @@ spring:
     hibernate:
       ddl-auto: validate
     open-in-view: false
-  flyway:
-    enabled: true
 
 server:
   port: 8080
+
+app:
+  admin:
+    email: ${ADMIN_USER_EMAIL:pavel@pekny.info}
+    password: ${ADMIN_USER_PASSWORD:admin123!}
+    full-name: ${ADMIN_USER_FULL_NAME:Administrator}
+  remember-me-key: ${REMEMBER_ME_KEY:golf-courses-remember-me-key}

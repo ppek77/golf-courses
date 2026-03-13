@@ -4,10 +4,11 @@ Web application for registering golf courses and tracking rounds played on them.
 
 ## Tech Stack
 
-- **Language:** Java 25
+- **Language:** Java 21
 - **Framework:** Spring Boot 4.0.3
 - **Database:** PostgreSQL
 - **Build tool:** Maven
+- **UI:** Thymeleaf server-side templates
 - **Deployment:** Docker container on DigitalOcean droplet
 
 ## Project Structure
@@ -16,7 +17,7 @@ Standard Maven/Spring Boot layout:
 
 ```
 src/main/java/          - Application source code
-src/main/resources/     - Configuration files (application.yml, etc.)
+src/main/resources/     - Configuration, templates, static assets
 src/test/java/          - Tests
 ```
 
@@ -32,11 +33,14 @@ src/test/java/          - Tests
 
 - Use `application.yml` (not `.properties`) for configuration
 - Database migrations managed via Flyway (SQL scripts in `src/main/resources/db/migration/`)
-- REST API with JSON responses
+- Spring MVC controllers returning Thymeleaf views
+- Thymeleaf templates in `src/main/resources/templates/`
+- Static assets (CSS, JS, images) in `src/main/resources/static/`
 - Entity classes use JPA annotations
 - Follow standard Java naming conventions (camelCase for fields/methods, PascalCase for classes)
 - Package structure: `info.pekny.golfcourses` (base package)
 - Write tests for all service-layer logic
+- Always respect the security concerns described in the [Security Guide](features/01-Security.md)
 
 ## Docker
 

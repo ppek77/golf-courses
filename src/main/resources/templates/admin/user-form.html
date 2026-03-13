@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${userId != null} ? 'Edit User' : 'Create User'">User Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav th:replace="~{fragments/layout :: nav}"></nav>
+<main class="container">
+    <h1 th:text="${userId != null} ? 'Edit User' : 'Create User'"></h1>
+    <form th:action="${userId != null} ? @{/admin/users/{id}/edit(id=${userId})} : @{/admin/users/create}"
+          method="post" th:object="${userForm}">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" th:field="*{fullName}" required>
+            <span class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" th:field="*{email}" required>
+            <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        </div>
+        <div class="form-group">
+            <label for="password" th:text="${userId != null} ? 'Password (leave blank to keep current)' : 'Password'"></label>
+            <input type="password" id="password" th:field="*{password}"
+                   th:required="${userId == null}" minlength="8">
+            <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" th:field="*{role}">
+                <option th:each="r : ${roles}" th:value="${r}" th:text="${r}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" th:field="*{active}"> Active
+            </label>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a th:href="@{/admin/users}" class="btn">Cancel</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>

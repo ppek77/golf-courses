@@ -1,15 +1,10 @@
 services:
   postgres:
-    image: postgres:17
-    container_name: golfcourses-postgres
+    image: postgres:16
+    container_name: golfcourses-db
     ports:
       - "5432:5432"
     environment:
       POSTGRES_DB: golfcourses
       POSTGRES_USER: golfcourses
       POSTGRES_PASSWORD: golfcourses
-    volumes:
-      - golfcourses-data:/var/lib/postgresql/data
-
-volumes:
-  golfcourses-data:
