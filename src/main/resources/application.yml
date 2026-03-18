@@ -15,12 +15,12 @@ server:
 
 app:
   admin:
-    email: ${ADMIN_USER_EMAIL:pavel@pekny.info}
+    email: ${ADMIN_USER_EMAIL:admin@company.com}
     password: ${ADMIN_USER_PASSWORD:admin123!}
     full-name: ${ADMIN_USER_FULL_NAME:Administrator}
   standard-user:
-    email: ${STANDARD_USER_EMAIL:bohumir.zajicek@seznam.cz}
+    email: ${STANDARD_USER_EMAIL:user@company.com}
     password: ${STANDARD_USER_PASSWORD:heslo123!}
-    full-name: ${STANDARD_USER_FULL_NAME:Bohumír Zajíček}
+    full-name: ${STANDARD_USER_FULL_NAME:Standard User}
 
   remember-me-key: ${REMEMBER_ME_KEY:golf-courses-remember-me-key}
