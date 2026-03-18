@@ -15,7 +15,7 @@ public class UserCreateForm {
     private String email;
 
     @NotBlank
-    @Size(min = 8, message = "Password must be at least 8 characters")
+    @Size(min = 8, message = "Heslo musí mít alespoň 8 znaků")
     private String password;
 
     @NotNull

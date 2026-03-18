@@ -6,11 +6,11 @@
     <div class="nav-container">
         <a href="/" class="nav-brand">Golf Courses</a>
         <div class="nav-links" sec:authorize="isAuthenticated()">
-            <a href="/" th:href="@{/}">Home</a>
-            <a href="/admin/users" th:href="@{/admin/users}" sec:authorize="hasRole('ADMIN')">Users</a>
-            <a href="/profile" th:href="@{/profile}">Profile</a>
+            <a href="/" th:href="@{/}">Domů</a>
+            <a href="/admin/users" th:href="@{/admin/users}" sec:authorize="hasRole('ADMIN')">Uživatelé</a>
+            <a href="/profile" th:href="@{/profile}">Profil</a>
             <form th:action="@{/logout}" method="post" class="nav-logout">
-                <button type="submit">Logout</button>
+                <button type="submit">Odhlásit</button>
             </form>
         </div>
     </div>

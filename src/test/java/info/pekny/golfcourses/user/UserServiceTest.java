@@ -105,6 +105,6 @@ class UserServiceTest {
 
         assertThatThrownBy(() -> userService.updateProfile("user@example.com", form))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Current password is incorrect");
+                .hasMessage("Současné heslo není správné");
     }
 }

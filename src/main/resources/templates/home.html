@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Golf Courses</title>
+    <title>Domů - Golf Courses</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <nav th:replace="~{fragments/layout :: nav}"></nav>
 <main class="container">
-    <h1>Welcome, <span sec:authentication="name">User</span></h1>
-    <p>Golf Courses application.</p>
+    <h1>Vítejte, <span sec:authentication="name">User</span></h1>
+    <p>Aplikace pro správu golfových hřišť.</p>
 </main>
 </body>
 </html>

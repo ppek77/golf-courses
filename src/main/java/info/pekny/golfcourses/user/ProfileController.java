@@ -38,14 +38,14 @@ public class ProfileController {
                                 RedirectAttributes redirectAttributes) {
         if (profileForm.getNewPassword() != null && !profileForm.getNewPassword().isBlank()
                 && profileForm.getNewPassword().length() < 8) {
-            result.rejectValue("newPassword", "size", "Password must be at least 8 characters");
+            result.rejectValue("newPassword", "size", "Heslo musí mít alespoň 8 znaků");
         }
         if (result.hasErrors()) {
             return "profile";
         }
         try {
             userService.updateProfile(userDetails.getUsername(), profileForm);
-            redirectAttributes.addFlashAttribute("success", "Profile updated successfully");
+            redirectAttributes.addFlashAttribute("success", "Profil byl aktualizován");
         } catch (IllegalArgumentException e) {
             result.rejectValue("currentPassword", "invalid", e.getMessage());
             return "profile";

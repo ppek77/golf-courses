@@ -3,33 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Golf Courses</title>
+    <title>Profil - Golf Courses</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <nav th:replace="~{fragments/layout :: nav}"></nav>
 <main class="container">
-    <h1>Edit Profile</h1>
+    <h1>Upravit profil</h1>
     <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
     <form th:action="@{/profile}" method="post" th:object="${profileForm}">
         <div class="form-group">
-            <label for="fullName">Full Name</label>
+            <label for="fullName">Celé jméno</label>
             <input type="text" id="fullName" th:field="*{fullName}" required>
             <span class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
         </div>
         <div class="form-group">
-            <label for="newPassword">New Password (leave blank to keep current)</label>
+            <label for="newPassword">Nové heslo (ponechte prázdné pro zachování stávajícího)</label>
             <input type="password" id="newPassword" th:field="*{newPassword}" minlength="8">
             <span class="error" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"></span>
         </div>
         <div class="form-group">
-            <label for="currentPassword">Current Password (required)</label>
+            <label for="currentPassword">Současné heslo (povinné)</label>
             <input type="password" id="currentPassword" th:field="*{currentPassword}" required>
             <span class="error" th:if="${#fields.hasErrors('currentPassword')}" th:errors="*{currentPassword}"></span>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a th:href="@{/}" class="btn">Cancel</a>
+            <button type="submit" class="btn btn-primary">Uložit</button>
+            <a th:href="@{/}" class="btn">Zrušit</a>
         </div>
     </form>
 </main>

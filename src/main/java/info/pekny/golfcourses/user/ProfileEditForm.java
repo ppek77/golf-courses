@@ -9,7 +9,7 @@ public class ProfileEditForm {
 
     private String newPassword;
 
-    @NotBlank(message = "Current password is required")
+    @NotBlank(message = "Současné heslo je povinné")
     private String currentPassword;
 
     public String getFullName() {

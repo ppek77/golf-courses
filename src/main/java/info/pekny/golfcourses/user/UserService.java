@@ -66,7 +66,7 @@ public class UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + email));
         if (!passwordEncoder.matches(form.getCurrentPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Current password is incorrect");
+            throw new IllegalArgumentException("Současné heslo není správné");
         }
         user.setFullName(form.getFullName());
         if (form.getNewPassword() != null && !form.getNewPassword().isBlank()) {

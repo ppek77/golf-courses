@@ -40,8 +40,9 @@ src/test/java/          - Tests
 - Follow standard Java naming conventions (camelCase for fields/methods, PascalCase for classes)
 - Package structure: `info.pekny.golfcourses` (base package)
 - Write tests for all service-layer logic
+- **Language:** Code (class names, variables, methods, comments) in English. All user-facing text (UI labels, messages, validation errors) in Czech.
 - Always respect the security concerns described in the [Security Guide](features/01-Security.md)
-- data model is described in the [Data Model](features/02-Data-Model.md)
+- Data model is described in the [Data Model](features/02-Data-Model.md)
 
 ## Docker
 

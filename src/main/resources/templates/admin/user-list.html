@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users - Golf Courses</title>
+    <title>Uživatelé - Golf Courses</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <nav th:replace="~{fragments/layout :: nav}"></nav>
 <main class="container">
     <div class="page-header">
-        <h1>Users</h1>
-        <a th:href="@{/admin/users/create}" class="btn btn-primary">Create User</a>
+        <h1>Uživatelé</h1>
+        <a th:href="@{/admin/users/create}" class="btn btn-primary">Vytvořit uživatele</a>
     </div>
     <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
     <table>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
+            <th>Jméno</th>
+            <th>E-mail</th>
             <th>Role</th>
-            <th>Active</th>
-            <th>Actions</th>
+            <th>Aktivní</th>
+            <th>Akce</th>
         </tr>
         </thead>
         <tbody>
@@ -29,8 +29,8 @@
             <td th:text="${user.fullName}"></td>
             <td th:text="${user.email}"></td>
             <td th:text="${user.role}"></td>
-            <td th:text="${user.active} ? 'Yes' : 'No'"></td>
-            <td><a th:href="@{/admin/users/{id}/edit(id=${user.id})}">Edit</a></td>
+            <td th:text="${user.active} ? 'Ano' : 'Ne'"></td>
+            <td><a th:href="@{/admin/users/{id}/edit(id=${user.id})}">Upravit</a></td>
         </tr>
         </tbody>
     </table>

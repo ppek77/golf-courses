@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Golf Courses</title>
+    <title>Přihlášení - Golf Courses</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div class="login-container">
     <h1>Golf Courses</h1>
-    <div th:if="${param.error}" class="alert alert-error">Invalid email or password.</div>
-    <div th:if="${param.logout}" class="alert alert-success">You have been logged out.</div>
-    <div th:if="${param.deactivated}" class="alert alert-error">Your account has been deactivated.</div>
+    <div th:if="${param.error}" class="alert alert-error">Neplatný e-mail nebo heslo.</div>
+    <div th:if="${param.logout}" class="alert alert-success">Byli jste odhlášeni.</div>
+    <div th:if="${param.deactivated}" class="alert alert-error">Váš účet byl deaktivován.</div>
     <form th:action="@{/login}" method="post">
         <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">E-mail</label>
             <input type="email" id="email" name="email" required autofocus>
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Heslo</label>
             <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
             <label>
-                <input type="checkbox" name="remember-me"> Remember me
+                <input type="checkbox" name="remember-me"> Zapamatovat si mě
             </label>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Přihlásit</button>
     </form>
 </div>
 </body>

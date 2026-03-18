@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${userId != null} ? 'Edit User' : 'Create User'">User Form</title>
+    <title th:text="${userId != null} ? 'Upravit uživatele' : 'Vytvořit uživatele'">Formulář uživatele</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <nav th:replace="~{fragments/layout :: nav}"></nav>
 <main class="container">
-    <h1 th:text="${userId != null} ? 'Edit User' : 'Create User'"></h1>
+    <h1 th:text="${userId != null} ? 'Upravit uživatele' : 'Vytvořit uživatele'"></h1>
     <form th:action="${userId != null} ? @{/admin/users/{id}/edit(id=${userId})} : @{/admin/users/create}"
           method="post" th:object="${userForm}">
         <div class="form-group">
-            <label for="fullName">Full Name</label>
+            <label for="fullName">Celé jméno</label>
             <input type="text" id="fullName" th:field="*{fullName}" required>
             <span class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">E-mail</label>
             <input type="email" id="email" th:field="*{email}" required>
             <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         </div>
         <div class="form-group">
-            <label for="password" th:text="${userId != null} ? 'Password (leave blank to keep current)' : 'Password'"></label>
+            <label for="password" th:text="${userId != null} ? 'Heslo (ponechte prázdné pro zachování stávajícího)' : 'Heslo'"></label>
             <input type="password" id="password" th:field="*{password}"
                    th:required="${userId == null}" minlength="8">
             <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
@@ -36,12 +36,12 @@
         </div>
         <div class="form-group">
             <label>
-                <input type="checkbox" th:field="*{active}"> Active
+                <input type="checkbox" th:field="*{active}"> Aktivní
             </label>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a th:href="@{/admin/users}" class="btn">Cancel</a>
+            <button type="submit" class="btn btn-primary">Uložit</button>
+            <a th:href="@{/admin/users}" class="btn">Zrušit</a>
         </div>
     </form>
 </main>

@@ -37,14 +37,14 @@ public class AdminUserController {
     public String create(@Valid UserCreateForm userForm, BindingResult result,
                          Model model, RedirectAttributes redirectAttributes) {
         if (userService.emailExists(userForm.getEmail())) {
-            result.rejectValue("email", "duplicate", "Email already in use");
+            result.rejectValue("email", "duplicate", "E-mail je již používán");
         }
         if (result.hasErrors()) {
             model.addAttribute("roles", Role.values());
             return "admin/user-form";
         }
         userService.create(userForm);
-        redirectAttributes.addFlashAttribute("success", "User created successfully");
+        redirectAttributes.addFlashAttribute("success", "Uživatel byl vytvořen");
         return "redirect:/admin/users";
     }
 
@@ -71,11 +71,11 @@ public class AdminUserController {
                 .orElseThrow(() -> new IllegalArgumentException("User not found: " + id));
         if (!existing.getEmail().equals(userForm.getEmail())
                 && userService.emailExists(userForm.getEmail())) {
-            result.rejectValue("email", "duplicate", "Email already in use");
+            result.rejectValue("email", "duplicate", "E-mail je již používán");
         }
         if (userForm.getPassword() != null && !userForm.getPassword().isBlank()
                 && userForm.getPassword().length() < 8) {
-            result.rejectValue("password", "size", "Password must be at least 8 characters");
+            result.rejectValue("password", "size", "Heslo musí mít alespoň 8 znaků");
         }
         if (result.hasErrors()) {
             model.addAttribute("userId", id);
@@ -83,7 +83,7 @@ public class AdminUserController {
             return "admin/user-form";
         }
         userService.update(id, userForm);
-        redirectAttributes.addFlashAttribute("success", "User updated successfully");
+        redirectAttributes.addFlashAttribute("success", "Uživatel byl aktualizován");
         return "redirect:/admin/users";
     }
 }
