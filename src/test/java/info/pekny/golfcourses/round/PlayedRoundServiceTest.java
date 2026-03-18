@@ -58,15 +58,15 @@ class PlayedRoundServiceTest {
         roundService = new PlayedRoundService(roundRepository, courseRepository,
                 teeRepository, holeRepository, userRepository);
 
+        user = new User("John", "john@example.com", "hashed", Role.USER);
+        setId(user, 100L);
+
         Country country = new Country("Czech Republic");
-        course = new GolfCourse("Karlštejn", country, LengthUnit.METERS);
+        course = new GolfCourse("Karlštejn", country, LengthUnit.METERS, user);
         setId(course, 1L);
 
         tee = new Tee("White", course);
         setId(tee, 10L);
-
-        user = new User("John", "john@example.com", "hashed", Role.USER);
-        setId(user, 100L);
 
         hole = new Hole(1, 4, 7, course);
         setId(hole, 50L);
@@ -99,7 +99,7 @@ class PlayedRoundServiceTest {
 
     @Test
     void createRoundWithTeeFromDifferentCourseThrows() throws Exception {
-        GolfCourse otherCourse = new GolfCourse("Other", new Country("Germany"), LengthUnit.METERS);
+        GolfCourse otherCourse = new GolfCourse("Other", new Country("Germany"), LengthUnit.METERS, user);
         setId(otherCourse, 2L);
         Tee wrongTee = new Tee("Red", otherCourse);
         setId(wrongTee, 20L);

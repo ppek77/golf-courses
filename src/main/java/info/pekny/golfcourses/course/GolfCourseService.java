@@ -2,6 +2,8 @@ package info.pekny.golfcourses.course;
 
 import info.pekny.golfcourses.country.Country;
 import info.pekny.golfcourses.country.CountryRepository;
+import info.pekny.golfcourses.user.User;
+import info.pekny.golfcourses.user.UserRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -15,23 +17,26 @@ public class GolfCourseService {
     private final TeeRepository teeRepository;
     private final HoleRepository holeRepository;
     private final CountryRepository countryRepository;
+    private final UserRepository userRepository;
 
     public GolfCourseService(GolfCourseRepository courseRepository,
                              TeeRepository teeRepository,
                              HoleRepository holeRepository,
-                             CountryRepository countryRepository) {
+                             CountryRepository countryRepository,
+                             UserRepository userRepository) {
         this.courseRepository = courseRepository;
         this.teeRepository = teeRepository;
         this.holeRepository = holeRepository;
         this.countryRepository = countryRepository;
+        this.userRepository = userRepository;
     }
 
-    public List<GolfCourse> findAll() {
-        return courseRepository.findAllByOrderByNameAsc();
+    public List<GolfCourse> findByUserId(Long userId) {
+        return courseRepository.findByUserIdOrderByNameAsc(userId);
     }
 
-    public Optional<GolfCourse> findById(Long id) {
-        return courseRepository.findById(id);
+    public Optional<GolfCourse> findByIdAndUserId(Long id, Long userId) {
+        return courseRepository.findByIdAndUserId(id, userId);
     }
 
     public List<Tee> findTeesByCourseId(Long courseId) {
@@ -43,18 +48,20 @@ public class GolfCourseService {
     }
 
     @Transactional
-    public GolfCourse create(String name, Long countryId, LengthUnit lengthUnit) {
+    public GolfCourse create(String name, Long countryId, LengthUnit lengthUnit, Long userId) {
         Country country = countryRepository.findById(countryId)
                 .orElseThrow(() -> new IllegalArgumentException("Country not found: " + countryId));
-        GolfCourse course = new GolfCourse(name, country, lengthUnit);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found: " + userId));
+        GolfCourse course = new GolfCourse(name, country, lengthUnit, user);
         return courseRepository.save(course);
     }
 
     @Transactional
-    public GolfCourse update(Long id, String name, Long countryId, String description,
+    public GolfCourse update(Long id, Long userId, String name, Long countryId, String description,
                              Double officialRating, Double personalRating,
                              boolean logoBall, LengthUnit lengthUnit) {
-        GolfCourse course = courseRepository.findById(id)
+        GolfCourse course = courseRepository.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new IllegalArgumentException("Course not found: " + id));
         Country country = countryRepository.findById(countryId)
                 .orElseThrow(() -> new IllegalArgumentException("Country not found: " + countryId));
@@ -69,13 +76,15 @@ public class GolfCourseService {
     }
 
     @Transactional
-    public void delete(Long id) {
-        courseRepository.deleteById(id);
+    public void delete(Long id, Long userId) {
+        GolfCourse course = courseRepository.findByIdAndUserId(id, userId)
+                .orElseThrow(() -> new IllegalArgumentException("Course not found: " + id));
+        courseRepository.delete(course);
     }
 
     @Transactional
-    public Tee addTee(Long courseId, String name, Double courseRating, Double slopeRating) {
-        GolfCourse course = courseRepository.findById(courseId)
+    public Tee addTee(Long courseId, Long userId, String name, Double courseRating, Double slopeRating) {
+        GolfCourse course = courseRepository.findByIdAndUserId(courseId, userId)
                 .orElseThrow(() -> new IllegalArgumentException("Course not found: " + courseId));
         Tee tee = new Tee(name, course);
         tee.setCourseRating(courseRating);
@@ -84,8 +93,8 @@ public class GolfCourseService {
     }
 
     @Transactional
-    public Hole addHole(Long courseId, int number, int par, int hcp) {
-        GolfCourse course = courseRepository.findById(courseId)
+    public Hole addHole(Long courseId, Long userId, int number, int par, int hcp) {
+        GolfCourse course = courseRepository.findByIdAndUserId(courseId, userId)
                 .orElseThrow(() -> new IllegalArgumentException("Course not found: " + courseId));
         Hole hole = new Hole(number, par, hcp, course);
         return holeRepository.save(hole);

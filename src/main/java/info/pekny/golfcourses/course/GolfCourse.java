@@ -1,6 +1,7 @@
 package info.pekny.golfcourses.course;
 
 import info.pekny.golfcourses.country.Country;
+import info.pekny.golfcourses.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,6 +49,10 @@ public class GolfCourse {
     @Column(nullable = false)
     private LengthUnit lengthUnit;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tee> tees = new ArrayList<>();
 
@@ -64,10 +69,11 @@ public class GolfCourse {
     protected GolfCourse() {
     }
 
-    public GolfCourse(String name, Country country, LengthUnit lengthUnit) {
+    public GolfCourse(String name, Country country, LengthUnit lengthUnit, User user) {
         this.name = name;
         this.country = country;
         this.lengthUnit = lengthUnit;
+        this.user = user;
     }
 
     @PreUpdate
@@ -137,6 +143,10 @@ public class GolfCourse {
 
     public List<Tee> getTees() {
         return tees;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public List<Hole> getHoles() {

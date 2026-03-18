@@ -1,5 +1,3 @@
--- Golf course data model
-
 CREATE TABLE countries (
     id   BIGSERIAL    PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE
@@ -14,6 +12,7 @@ CREATE TABLE golf_courses (
     personal_rating DOUBLE PRECISION,
     logo_ball       BOOLEAN      NOT NULL DEFAULT FALSE,
     length_unit     VARCHAR(10)  NOT NULL,
+    user_id         BIGINT       NOT NULL REFERENCES users(id),
     created_at      TIMESTAMP    NOT NULL DEFAULT NOW(),
     updated_at      TIMESTAMP    NOT NULL DEFAULT NOW()
 );
