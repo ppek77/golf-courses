@@ -18,4 +18,9 @@ app:
     email: ${ADMIN_USER_EMAIL:pavel@pekny.info}
     password: ${ADMIN_USER_PASSWORD:admin123!}
     full-name: ${ADMIN_USER_FULL_NAME:Administrator}
+  standard-user:
+    email: ${STANDARD_USER_EMAIL:bohumir.zajicek@seznam.cz}
+    password: ${STANDARD_USER_PASSWORD:heslo123!}
+    full-name: ${STANDARD_USER_FULL_NAME:Bohumír Zajíček}
+
   remember-me-key: ${REMEMBER_ME_KEY:golf-courses-remember-me-key}

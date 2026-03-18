@@ -11,20 +11,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AdminUserInitializer implements ApplicationRunner {
+public class UserInitializer implements ApplicationRunner {
 
-    private static final Logger log = LoggerFactory.getLogger(AdminUserInitializer.class);
+    private static final Logger log = LoggerFactory.getLogger(UserInitializer.class);
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AdminProperties adminProperties;
+    private final StandardUserProperties standardUserProperties;
 
-    public AdminUserInitializer(UserRepository userRepository,
-                                PasswordEncoder passwordEncoder,
-                                AdminProperties adminProperties) {
+    public UserInitializer(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder,
+                           AdminProperties adminProperties,
+                           StandardUserProperties standardUserProperties) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.adminProperties = adminProperties;
+        this.standardUserProperties = standardUserProperties;
     }
 
     @Override
@@ -38,6 +41,16 @@ public class AdminUserInitializer implements ApplicationRunner {
             );
             userRepository.save(admin);
             log.info("Default admin user created: {}", adminProperties.email());
+        }
+        if (!userRepository.existsByRole(Role.USER)) {
+            User zajic = new User(
+                    standardUserProperties.fullName(),
+                    standardUserProperties.email(),
+                    passwordEncoder.encode(standardUserProperties.password()),
+                    Role.USER
+            );
+            userRepository.save(zajic);
+            log.info("Default standard user created: {}", standardUserProperties.email());
         }
     }
 }
