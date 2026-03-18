@@ -27,3 +27,4 @@ replay_pid*
 target/
 *.iml
 .mvn/wrapper/maven-wrapper.jar
+.claude/

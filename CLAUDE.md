@@ -41,6 +41,7 @@ src/test/java/          - Tests
 - Package structure: `info.pekny.golfcourses` (base package)
 - Write tests for all service-layer logic
 - Always respect the security concerns described in the [Security Guide](features/01-Security.md)
+- data model is described in the [Data Model](features/02-Data-Model.md)
 
 ## Docker
 
